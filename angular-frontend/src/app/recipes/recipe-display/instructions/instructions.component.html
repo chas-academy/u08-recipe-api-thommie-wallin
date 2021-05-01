@@ -1,0 +1,8 @@
+<div>
+  <h3>Instructions:</h3>
+  <mat-selection-list>
+    <mat-list-option class="recipe-instructions-item" *ngFor="let data of recipe">
+      {{ data.number }}. {{ data.step }}
+    </mat-list-option>
+  </mat-selection-list>
+</div>

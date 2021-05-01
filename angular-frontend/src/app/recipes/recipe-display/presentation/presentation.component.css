@@ -1,0 +1,30 @@
+.recipe-presentation {
+  position: relative;
+}
+
+.recipe-presentation-header-wrapper {
+  padding: 2.5rem;
+}
+
+.more-button {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+}
+
+.summary-list {
+  list-style: none;
+  margin: 0;
+}
+
+.summary-list > li {
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.summary-img {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}

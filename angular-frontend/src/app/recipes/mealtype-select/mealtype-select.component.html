@@ -1,0 +1,10 @@
+<mat-form-field appearance="fill">
+  <mat-label>Meal types</mat-label>
+  <mat-select [(value)]="selected" (selectionChange)="sendMessage($event)">
+    <mat-option value="None">None</mat-option>
+    <mat-option value="appetizer">Appetizer</mat-option>
+    <mat-option value="main course">Main course</mat-option>
+    <mat-option value="dessert">Dessert</mat-option>
+  </mat-select>
+</mat-form-field>
+<p>You selected: {{selected}}</p>

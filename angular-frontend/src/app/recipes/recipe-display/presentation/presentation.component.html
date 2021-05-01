@@ -1,0 +1,19 @@
+<div class="recipe-presentation" fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px grid" *ngIf="recipe">
+  <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column" class="recipe-presentation-header-wrapper">
+    <h1 class="mat-h1">{{ recipe.title }}</h1>
+    <div>
+      <ul class="summary-list" fxLayout="row">
+        <li><mat-icon>group</mat-icon> {{ recipe.servings }} servings</li>
+        <li><mat-icon>access_time</mat-icon> {{ recipe.readyInMinutes }} minutes</li>
+      </ul>
+    </div>
+    <p [innerHTML]="recipe.summary"></p>
+  </div>
+
+  <div class="summary-img" fxFlex="50%" fxFlex.xs="100%">
+    <img src="{{ recipe.image }}" alt="Recipe image">
+    <button (click)="addToFavourites(recipe)"  mat-mini-fab class="more-button" aria-label="add to favourites">
+      <mat-icon>favorite</mat-icon>
+    </button>
+  </div>
+</div>

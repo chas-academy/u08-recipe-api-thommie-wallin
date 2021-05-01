@@ -1,0 +1,8 @@
+<div class="grid-container" *ngIf="(recipe$ | async) as recipe">
+  <app-presentation [recipe]="recipe"></app-presentation>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px grid">
+    <app-ingredients fxFlex="50%" fxFlex.xs="100%" [recipe]="recipe.extendedIngredients"></app-ingredients>
+    <app-instructions fxFlex="50%" fxFlex.xs="100%" [recipe]="recipe.analyzedInstructions[0].steps"></app-instructions>
+  </div>
+</div>

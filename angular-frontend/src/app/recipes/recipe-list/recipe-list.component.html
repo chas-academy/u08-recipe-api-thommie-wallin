@@ -1,0 +1,19 @@
+<mat-grid-list [cols]="cols">   
+  <mat-grid-tile [colspan]="1" *ngFor="let recipe of (recipes | async)?.results">
+    <mat-card class="dashboard-card">
+      <a routerLink="/recipe/{{ recipe.id }}">
+        <mat-card-header>
+          <mat-card-title title="{{ recipe.title }}">
+            {{ recipe.title }}
+          </mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="{{ recipe.image }}">
+      </a>
+      <mat-card-actions>
+        <button (click)="addToFavourites(recipe)"  mat-mini-fab class="more-button" aria-label="add to favourites">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

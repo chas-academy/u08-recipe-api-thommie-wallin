@@ -1,0 +1,20 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Recipes</h1>
+  
+    <mat-grid-list [cols]="cols" rowHeight="3:1">
+      <mat-grid-tile [colspan]="1">
+        <app-mealtype-select (messageEvent)="receiveMealTypeMessage($event)"></app-mealtype-select>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1">
+        <app-allergene-select (messageEvent)="receiveAllergeneMessage($event)"></app-allergene-select>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1">
+        <app-diet-select (messageEvent)="receiveAllergeneMessage($event)"></app-diet-select>
+      </mat-grid-tile>
+    </mat-grid-list>
+    
+    <div class="list-content">
+      <app-recipe-list [recipes]="recipes"></app-recipe-list>
+    </div>
+
+</div>
