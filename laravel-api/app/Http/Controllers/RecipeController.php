@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Recipe;
 
 class RecipeController extends Controller
@@ -12,9 +13,14 @@ class RecipeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($userListId)
     {
-        return Recipe::all();
+        // $response = $userListId;
+
+        // return response($response, 201);
+
+        // return Recipe::all();
+        return auth()->user()->userlist()->recipe()->where('user_lists_id', $userListId)->get();
     }
 
     /**
@@ -29,7 +35,12 @@ class RecipeController extends Controller
             'recipe_nr' => 'required',
             'user_lists_id' => 'required',
         ]);
+
         return Recipe::create($request->all());
+        // return Recipe::create([
+        //     'recipe_nr' => $request->recipe_nr,
+        //     'user_lists_id' => $request->user_lists_id
+        // ]);
     }
 
     /**

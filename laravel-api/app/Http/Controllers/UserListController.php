@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\UserList;
 
 class UserListController extends Controller
@@ -14,7 +15,9 @@ class UserListController extends Controller
      */
     public function index()
     {
-        return UserList::all();
+        // return UserList::all();
+        // return Auth::user()->userlist()->get();
+        return auth()->user()->userlist()->get();
     }
 
     /**
@@ -28,7 +31,17 @@ class UserListController extends Controller
         $request->validate([
             'title' => 'required'
         ]);
-        return UserList::create($request->all());
+
+        // $response = auth()->user()->id;
+
+        // return response($response, 201);
+        
+
+        // return UserList::create($request->all());
+        return UserList::create([
+            'title' => $request->title,
+            'user_id' => auth()->user()->id
+        ]);
     }
 
     /**
@@ -52,7 +65,10 @@ class UserListController extends Controller
     public function update(Request $request, $id)
     {
         $userlist = UserList::find($id);
-        $userlist->update($request->all());
+        $userlist->update([
+            'title' => $request->title,
+            'user_id' => auth()->user()->id
+        ]);
         return $userlist;
     }
 
@@ -75,6 +91,7 @@ class UserListController extends Controller
      */
     public function search($title)
     {
-        return UserList::where('title', 'like', '%'.$title.'%')->get();
+        // return UserList::where('title', 'like', '%'.$title.'%')->get();
+        return auth()->user()->userlist()->where('title', 'like', '%'.$title.'%')->get();
     }
 }

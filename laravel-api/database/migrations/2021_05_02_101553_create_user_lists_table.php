@@ -16,6 +16,7 @@ class CreateUserListsTable extends Migration
         Schema::create('user_lists', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

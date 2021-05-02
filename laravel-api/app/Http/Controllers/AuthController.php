@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 
@@ -50,6 +51,9 @@ class AuthController extends Controller
                 'message' => 'Incorrect email or password'
             ], 401);
         }
+
+        // $credentials = $request->only('email', 'password');
+        // Auth::attempt($credentials);
 
         $token = $user->createToken('My Token')->plainTextToken;
 
