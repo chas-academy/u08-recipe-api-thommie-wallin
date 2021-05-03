@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +23,8 @@ import { SharedModule } from  './shared/shared.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { HomeComponent } from './components/home/home.component';
     NavComponent,
     HomeComponent,
     FavouritesComponent,
+    RegistrationComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,8 @@ import { HomeComponent } from './components/home/home.component';
     MatMenuModule,
     MatListModule,
     MatSnackBarModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
