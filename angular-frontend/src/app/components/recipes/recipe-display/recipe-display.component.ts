@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { DataService } from '../../core/services/data.service';
+import { DataService } from '../../../core/services/data.service';
 import { Recipe } from 'src/app/shared/models/recipe.model';
 
 @Component({

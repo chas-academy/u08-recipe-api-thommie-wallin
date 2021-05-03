@@ -16,14 +16,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { RecipesComponent } from './recipes.component';
-import { MealtypeSelectComponent } from './mealtype-select/mealtype-select.component';
-import { RecipeListComponent } from './recipe-list/recipe-list.component';
-import { AllergeneSelectComponent } from './allergene-select/allergene-select.component';
-import { DietSelectComponent } from './diet-select/diet-select.component';
+import { MealtypeSelectComponent } from './components/mealtype-select/mealtype-select.component';
+import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
+import { AllergeneSelectComponent } from './components/allergene-select/allergene-select.component';
+import { DietSelectComponent } from './components/diet-select/diet-select.component';
 import { RecipeDisplayComponent } from './recipe-display/recipe-display.component';
-import { InstructionsComponent } from './recipe-display/instructions/instructions.component';
-import { IngredientsComponent } from './recipe-display/ingredients/ingredients.component';
-import { PresentationComponent } from './recipe-display/presentation/presentation.component';
+import { InstructionsComponent } from './recipe-display/components/instructions/instructions.component';
+import { IngredientsComponent } from './recipe-display/components/ingredients/ingredients.component';
+import { PresentationComponent } from './recipe-display/components/presentation/presentation.component';
 
 
 

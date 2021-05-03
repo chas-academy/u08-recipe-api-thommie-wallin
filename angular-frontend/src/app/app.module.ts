@@ -15,13 +15,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
-import { RecipesModule } from './recipes/recipes.module';
-import { FavouritesComponent } from './favourites/favourites.component';
+import { RecipesModule } from './components/recipes/recipes.module';
+import { FavouritesComponent } from './components/favourites/favourites.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from  './shared/shared.module';
 import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
-import { HomeComponent } from './home/home.component';
+import { NavComponent } from './components/nav/nav.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
