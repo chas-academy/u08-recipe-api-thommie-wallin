@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRecipesTable extends Migration
+class RecipeUserList extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateRecipesTable extends Migration
      */
     public function up()
     {
-        Schema::create('recipes', function (Blueprint $table) {
-            $table->id();
-            $table->integer('recipe_nr');
-            $table->timestamps();
+        Schema::create('recipe_user_list', function (Blueprint $table) {
+            $table->foreignId('recipe_id')->constrained();
+            $table->foreignId('user_list_id')->constrained();
         });
     }
 
@@ -27,6 +26,6 @@ class CreateRecipesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recipes');
+        Schema::dropIfExists('recipe_user_list');
     }
 }

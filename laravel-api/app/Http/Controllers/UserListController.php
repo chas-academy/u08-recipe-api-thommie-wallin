@@ -80,6 +80,7 @@ class UserListController extends Controller
      */
     public function destroy($id)
     {
+        UserList::find($id)->recipes()->detach();
         return UserList::destroy($id);
     }
 

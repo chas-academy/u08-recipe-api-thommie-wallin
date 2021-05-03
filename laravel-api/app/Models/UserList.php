@@ -21,8 +21,8 @@ class UserList extends Model
     /**
     * Get the recipes for the list.
     */
-    public function recipe()
+    public function recipes()
     {
-        return $this->belongsToMany(Recipe::class);
+        return $this->belongsToMany(Recipe::class, 'recipe_user_list', 'user_list_id', 'recipe_id');
     }
 }

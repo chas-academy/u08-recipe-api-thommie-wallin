@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
   Route::get('/recipe/{id}', [RecipeController::class, 'index']);
   // Route::get('/recipe/{id}', [RecipeController::class, 'show']);
-  Route::post('/recipe', [RecipeController::class, 'store']);
+  Route::post('/recipe/{id}', [RecipeController::class, 'store']);
   Route::put('/recipe/{id}', [RecipeController::class, 'update']);
-  Route::delete('/recipe/{id}', [RecipeController::class, 'destroy']);
+  Route::delete('/recipe/{recipeId}/fromlist/{userListId}', [RecipeController::class, 'destroy']);
 });
