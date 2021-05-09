@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
-import { DataService } from '../core/services/data.service';
+import { DataService } from '../../core/services/data.service';
 // import { ResponseTest } from '../shared/interfaces';
 import { Recipe } from 'src/app/shared/models/recipe.model';
 

@@ -29,8 +29,13 @@ use App\Http\Controllers\AuthController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+// Route::get('/test', function() {
+//   return 'test';
+// });
+
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
+  
   Route::post('/logout', [AuthController::class, 'logout']);
 
   Route::get('/userlist', [UserListController::class, 'index']);

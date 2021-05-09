@@ -8,6 +8,9 @@
       <a mat-list-item routerLink="/home">Home</a>
       <a mat-list-item routerLink="/recipes">Recipes</a>
       <a mat-list-item routerLink="/favourites">Favourites</a>
+      <a mat-list-item routerLink="/registration">Registration</a>
+      <a mat-list-item routerLink="/login">Login</a>
+      <a mat-list-item (click)="logout()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -20,7 +23,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>u07-recipe-app-thommie-wallin</span>
+      <span>u08-recipe-api-thommie-wallin</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
