@@ -19,19 +19,16 @@ import { TokenService } from '../../shared/auth/token.service';
 })
 export class AuthService {
 
-  
-
   constructor(
     private http: HttpClient,
-    public token: TokenService,
+    // public token: TokenService,
   ) { }
 
-  getCookie() {
-    return this.http.get<any>('http://u08.test/sanctum/csrf-cookie');
-  }
+  // getCookie() {
+  //   return this.http.get<any>('http://u08.test/sanctum/csrf-cookie');
+  // }
 
   register(user: User): Observable<any> {
-    // this.http.get<any>('http://u08.test/sanctum/csrf-cookie');
     return this.http.post<any>('http://u08.test/api/register', user);
   }
   
