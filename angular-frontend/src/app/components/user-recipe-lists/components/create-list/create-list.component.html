@@ -1,0 +1,12 @@
+<div class="container">
+    <h1 class="mat-h1">Create list</h1>
+    <form class="createListForm" [formGroup]="createListForm" (ngSubmit)="onSubmit()">
+        
+        <mat-form-field appearance="standard">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput formControlName="title">
+        </mat-form-field>
+        
+        <button type="submit" mat-raised-button color="primary">Create list</button>
+    </form>
+</div>

@@ -31,6 +31,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './shared/auth/auth.interceptor';
+import { UserRecipeListsModule } from './components/user-recipe-lists/user-recipe-lists.module';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { AuthInterceptor } from './shared/auth/auth.interceptor';
     HttpClientModule,
     MatDividerModule,
     MatInputModule,
+    UserRecipeListsModule,
   ],
   providers: [
     {

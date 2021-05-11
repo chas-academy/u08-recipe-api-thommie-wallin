@@ -6,6 +6,10 @@ export class User {
   password_confirmation: String
 }
 
+export class ListTitle {
+  title: string;
+}
+
 export interface Tile {
   cols: number;
   rows: number;
