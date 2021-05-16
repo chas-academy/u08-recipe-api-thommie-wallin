@@ -5,9 +5,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 import { UserRecipeListsComponent } from './user-recipe-lists.component';
 import { CreateListComponent } from './components/create-list/create-list.component';
+import { ReadAllListsComponent } from './components/read-all-lists/read-all-lists.component';
 
 
 
@@ -15,6 +18,7 @@ import { CreateListComponent } from './components/create-list/create-list.compon
   declarations: [
     UserRecipeListsComponent,
     CreateListComponent,
+    ReadAllListsComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +27,8 @@ import { CreateListComponent } from './components/create-list/create-list.compon
     MatButtonModule,
     ReactiveFormsModule, 
     FormsModule,
+    MatCardModule,
+    MatIconModule,
   ]
 })
 export class UserRecipeListsModule { }

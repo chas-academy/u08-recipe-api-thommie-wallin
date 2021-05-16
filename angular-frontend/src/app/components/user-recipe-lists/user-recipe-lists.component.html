@@ -1,3 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="(lists | async) as list">
   <app-create-list (newNamingEvent)="receiveCreateListData($event)"></app-create-list>
+  <app-read-all-lists [list]="list"></app-read-all-lists>
 </div>

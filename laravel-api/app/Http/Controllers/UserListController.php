@@ -38,10 +38,12 @@ class UserListController extends Controller
         
 
         // return UserList::create($request->all());
-        return UserList::create([
+        $response = UserList::create([
             'title' => $request->title,
             'user_id' => auth()->user()->id
         ]);
+
+        return response($response, 200);
     }
 
     /**

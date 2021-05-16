@@ -1,0 +1,19 @@
+<div fxLayout="column">
+  <h1>My Lists</h1>
+  <div *ngFor="let item of list">
+    <mat-card class="recipe-list">
+      <span>{{ item.title }}</span>
+      <div class="card-right">
+        <button mat-mini-fab color="warn" aria-label="Example icon button with a delete icon">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+    <div class="card-under">
+      <div class="dates">
+        <span>Created: {{ item.created_at | date: 'short' }}</span>
+        <span>Updated: {{ item.updated_at | date: 'short' }}</span>
+      </div>
+    </div>
+  </div>
+</div>
