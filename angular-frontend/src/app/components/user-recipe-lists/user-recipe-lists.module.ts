@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { UserRecipeListsComponent } from './user-recipe-lists.component';
 import { CreateListComponent } from './components/create-list/create-list.component';
@@ -29,6 +30,7 @@ import { ReadAllListsComponent } from './components/read-all-lists/read-all-list
     FormsModule,
     MatCardModule,
     MatIconModule,
+    MatSnackBarModule,
   ]
 })
 export class UserRecipeListsModule { }

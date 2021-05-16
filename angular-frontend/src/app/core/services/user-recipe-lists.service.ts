@@ -15,7 +15,6 @@ export class UserRecipeListsService {
   private _lists = new BehaviorSubject<List[]>([]);
   // private dataStore: { lists: List[] } = { lists: [] }; // store our data in memory
   readonly lists = this._lists.asObservable();
-  private test: any[] =[];
 
   constructor(
     private http: HttpClient,
@@ -56,20 +55,45 @@ export class UserRecipeListsService {
   
   //* TEST Fungerar 
   storeList(title: ListTitle) {
-    this.http
-      .post<any>(`${this.baseUrl}userlist`, title)
+    this.http.post<any>(`${this.baseUrl}userlist`, title)
       .subscribe(
         data => {
+          let latestList: List[] = [];
+
           // Get latest list and add created list
           this.lists.subscribe(value => {
             value.push(data), 
-            this.test = value
+            latestList = value
           }).unsubscribe();
           
           // Push a new copy of the lists to all Subscribers.
-          this._lists.next(this.test);
+          this._lists.next(latestList);
         },
-        error => console.log('Could not create todo.')
+        error => console.log('Could not create list.')
+      );
+  }
+
+  deleteList(listId) {
+    this.http.delete<any>(`${this.baseUrl}userlist/${listId}`)
+      .subscribe(
+        data => {
+          let latestList: List[] = [];
+          let indexNr: number = 0;
+          
+          // Get latest list of lists from observer and delete list with this id.
+          this.lists.subscribe(value => {
+            indexNr = value.findIndex(recipe => recipe.id == data.id);
+
+            if (indexNr !== -1) {
+              value.splice(indexNr, 1);
+              latestList = value
+            }
+          }).unsubscribe();
+          
+          // Push a new copy of the lists to all Subscribers.
+          this._lists.next(latestList);
+        },
+        error => console.log('Could not delete list.')
       );
   }
 

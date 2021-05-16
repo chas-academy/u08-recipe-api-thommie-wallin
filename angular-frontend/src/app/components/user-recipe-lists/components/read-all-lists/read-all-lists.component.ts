@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
 
 import { List } from '../../../../shared/interfaces';
 
@@ -8,7 +8,11 @@ import { List } from '../../../../shared/interfaces';
   styleUrls: ['./read-all-lists.component.css']
 })
 export class ReadAllListsComponent implements OnInit, OnChanges {
+  // Lists to present in component
   @Input() list: List[];
+
+  // List to remove
+  @Output() deleteEvent = new EventEmitter<any>();
 
   constructor() { }
 
@@ -18,6 +22,10 @@ export class ReadAllListsComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     // this.list.subscribe(data=>console.log(data));
     // console.log(this.list)
+  }
+
+  deleteId(event) {
+    this.deleteEvent.emit(event);
   }
 
 }
