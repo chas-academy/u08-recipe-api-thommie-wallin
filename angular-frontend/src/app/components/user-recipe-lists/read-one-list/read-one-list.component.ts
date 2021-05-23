@@ -13,7 +13,7 @@ import { List } from '../../../shared/interfaces';
 export class ReadOneListComponent implements OnInit {
   listId: string;
   list: Observable<List>;
-  results;
+  recipes: Observable<List[]>;
   
 
   constructor(
@@ -42,8 +42,8 @@ export class ReadOneListComponent implements OnInit {
     // Get recipes from database
     this.listId = this.route.snapshot.paramMap.get('id');
     this.userRecipeListsService.showRecipes(this.listId);
-    this.results = this.userRecipeListsService.recipes;
-    // console.log(this.results);
+    this.recipes = this.userRecipeListsService.recipes;
+    console.log(this.recipes);
   }
 
 }

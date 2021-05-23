@@ -73,10 +73,10 @@ export class UserRecipeListsService {
   showRecipes(listId) {
     return this.http.get<any>(`${this.baseUrl}recipe/${listId}`).subscribe(
       data => {  
-        let latestList = data;
+        // let latestList = data;
 
         // data = this.recipes;
-        // this._recipes.next(data);
+        this._recipes.next(data);
         // console.log(this.recipes);
         // latestList.foreach(recipe_nr => {
         //   console.log(recipe_nr);

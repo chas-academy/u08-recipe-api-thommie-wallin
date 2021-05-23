@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -35,6 +36,7 @@ import { ReadOneListComponent } from './read-one-list/read-one-list.component';
     MatIconModule,
     MatSnackBarModule,
     RouterModule,
+    FlexLayoutModule,
   ]
 })
 export class UserRecipeListsModule { }
