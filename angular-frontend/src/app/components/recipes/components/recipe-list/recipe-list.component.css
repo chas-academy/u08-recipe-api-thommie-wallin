@@ -16,6 +16,12 @@
   right: 10px;
 }
 
+.save-button {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
 mat-card-header {
   width: calc(90%);
   white-space: nowrap;

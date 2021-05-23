@@ -147,4 +147,15 @@ export class UserRecipeListsService {
       );
   }
 
+  storeRecipe(listId, recipe) {
+    this.http.post<any>(`${this.baseUrl}recipe/${listId}`, recipe)
+      .subscribe(
+        data => {
+          // console.log(data);
+        },
+        error => console.log(error.error.text)
+        
+      );
+  }
+
 }

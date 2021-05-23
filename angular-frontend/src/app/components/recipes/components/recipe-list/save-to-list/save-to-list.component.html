@@ -1,0 +1,7 @@
+<button mat-raised-button color="primary" [matMenuTriggerFor]="aboveMenu">Add to list</button>
+<mat-menu #aboveMenu="matMenu" yPosition="above" >
+  <button mat-menu-item
+    *ngFor="let list of (userLists | async)"
+    (click)="addToList(list.id, recipe)"
+    >{{ list.title }}</button>
+</mat-menu>

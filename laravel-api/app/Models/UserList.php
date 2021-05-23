@@ -23,6 +23,7 @@ class UserList extends Model
     */
     public function recipes()
     {
-        return $this->belongsToMany(Recipe::class, 'recipe_user_list', 'user_list_id', 'recipe_id');
+        // return $this->belongsToMany(Recipe::class, 'recipe_user_list', 'user_list_id', 'recipe_id');
+        return $this->belongsToMany(Recipe::class);
     }
 }

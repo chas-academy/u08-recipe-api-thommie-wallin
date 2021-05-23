@@ -46,20 +46,20 @@ class RecipeController extends Controller
     public function store(Request $request, $id)
     {
         $request->validate([
-            'recipe_nr' => 'required',
+            'id' => 'required',
             'image' => 'required',
             'imageType' => 'required',
             'title' => 'required',            
         ]);
         
         // Search if recipe exist in this userlist
-        $ulSearch = UserList::find($id)->recipes()->where('recipe_nr', $request->recipe_nr)->get();
+        $ulSearch = UserList::find($id)->recipes()->where('recipe_id', $request->id)->get();
         if (!$ulSearch->isEmpty()) {
-            return 'recipe already exist in this list';
+            return response('recipe already exist in this list');
         }
 
         // Search if recipe exist in database
-        $dbSearch = Recipe::where('recipe_nr', $request->recipe_nr)->get();
+        $dbSearch = Recipe::where('id', $request->id)->get();
         
         // return response($dbSearch);
         if (!$dbSearch->isEmpty()) {
@@ -69,7 +69,7 @@ class RecipeController extends Controller
         }
 
         $recipe = Recipe::create($request->all());
-        UserList::find($id)->recipes()->attach($recipe->id);
+        UserList::find($id)->recipes()->attach($request->id);
 
         // return RecipeUserList::create([
         //     'recipe_id' => $recipe->id,
