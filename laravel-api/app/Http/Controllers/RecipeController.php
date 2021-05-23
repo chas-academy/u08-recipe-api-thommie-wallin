@@ -29,9 +29,9 @@ class RecipeController extends Controller
 
         // $recipes = UserList::with('recipes')->get();
 
-        // $response = $recipes;
-        // return response($response, 200);
-        return UserList::find($userListId)->recipes()->get();
+        $response = UserList::find($userListId)->recipes()->get();
+        return response($response, 200);
+        
 
         // return Recipe::all();
         // return auth()->user()->userlist()->recipe()->where('user_lists_id', $userListId)->get();
@@ -47,7 +47,9 @@ class RecipeController extends Controller
     {
         $request->validate([
             'recipe_nr' => 'required',
-            // 'user_lists_id' => 'required',
+            'image' => 'required',
+            'imageType' => 'required',
+            'title' => 'required',            
         ]);
         
         // Search if recipe exist in this userlist
@@ -58,6 +60,8 @@ class RecipeController extends Controller
 
         // Search if recipe exist in database
         $dbSearch = Recipe::where('recipe_nr', $request->recipe_nr)->get();
+        
+        // return response($dbSearch);
         if (!$dbSearch->isEmpty()) {
             // Add recipe to userlist but not db
             UserList::find($id)->recipes()->attach($dbSearch[0]->id);

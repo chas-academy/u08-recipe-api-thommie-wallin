@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,6 +13,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserRecipeListsComponent } from './user-recipe-lists.component';
 import { CreateListComponent } from './components/create-list/create-list.component';
 import { ReadAllListsComponent } from './components/read-all-lists/read-all-lists.component';
+import { ReadOneListComponent } from './read-one-list/read-one-list.component';
 
 
 
@@ -20,6 +22,7 @@ import { ReadAllListsComponent } from './components/read-all-lists/read-all-list
     UserRecipeListsComponent,
     CreateListComponent,
     ReadAllListsComponent,
+    ReadOneListComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { ReadAllListsComponent } from './components/read-all-lists/read-all-list
     MatCardModule,
     MatIconModule,
     MatSnackBarModule,
+    RouterModule,
   ]
 })
 export class UserRecipeListsModule { }

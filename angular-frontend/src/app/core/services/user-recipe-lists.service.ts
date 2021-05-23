@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, AsyncSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 import { CoreModule } from '../core.module';
 import { ListTitle, List } from '../../shared/interfaces';
+import { Recipe } from '../../shared/models/recipe.model';
 import { TokenService } from '../../shared/auth/token.service';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: CoreModule,
@@ -16,8 +18,17 @@ export class UserRecipeListsService {
   // private dataStore: { lists: List[] } = { lists: [] }; // store our data in memory
   readonly lists = this._lists.asObservable();
 
+  //? Replaysubject eller subject istället för behavioursubject?
+  private _list = new Subject<List>();
+  readonly list = this._list.asObservable();
+
+  private _recipes = new BehaviorSubject<any>([]);
+  readonly recipes = this._recipes.asObservable();
+  
+
   constructor(
     private http: HttpClient,
+    private dataService: DataService,
     // public token: TokenService,
   ) { }
 
@@ -44,6 +55,45 @@ export class UserRecipeListsService {
         this._lists.next(data);
       },
       error => console.log('Could not load lists.')
+    );
+  }
+
+  showList(listId) {
+    return this.http.get<List>(`${this.baseUrl}userlist/${listId}`).subscribe(
+      data => {  
+        
+        this._list.next(data);
+        // this.list.subscribe(data1 => console.log(data1));
+        // console.log(data);
+      },
+      error => console.log('Could not load this list.')
+    );
+  }
+
+  showRecipes(listId) {
+    return this.http.get<any>(`${this.baseUrl}recipe/${listId}`).subscribe(
+      data => {  
+        let latestList = data;
+
+        // data = this.recipes;
+        // this._recipes.next(data);
+        // console.log(this.recipes);
+        // latestList.foreach(recipe_nr => {
+        //   console.log(recipe_nr);
+
+        //   // this.dataService.getRecipe(recipe_nr).subscribe(
+        //   //   data => {
+        //   //     // this.recipes += data
+        //   //     // this.recipes.push(data);
+        //   //     console.log(this.recipes);
+        //   //   }
+            
+        //   // );
+        // })
+        
+        // console.log(data);
+      },
+      error => console.log('Could not load this list.')
     );
   }
 

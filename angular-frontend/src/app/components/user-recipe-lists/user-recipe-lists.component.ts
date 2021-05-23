@@ -16,9 +16,9 @@ import { CreateListComponent } from './components/create-list/create-list.compon
 export class UserRecipeListsComponent implements OnInit {
   listTitle: ListTitle;
   lists: Observable<List[]>;
-  listId;
+  listId: number;
 
-  @ViewChild(CreateListComponent) viewChild: CreateListComponent;
+  // @ViewChild(CreateListComponent) viewChild: CreateListComponent;
 
   constructor(
     public userRecipeListsService: UserRecipeListsService,
@@ -57,6 +57,7 @@ export class UserRecipeListsComponent implements OnInit {
 
       //* TEST Fungerar!!
       this.userRecipeListsService.storeList(this.listTitle);
+      
       this._snackBar.open('List created', 'OK', {
         duration: 3000
       });

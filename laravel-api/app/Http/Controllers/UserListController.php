@@ -17,7 +17,9 @@ class UserListController extends Controller
     {
         // return UserList::all();
         // return Auth::user()->userlist()->get();
-        return auth()->user()->userlist()->get();
+         
+        $response = auth()->user()->userlist()->get();
+        return response($response, 200);
     }
 
     /**

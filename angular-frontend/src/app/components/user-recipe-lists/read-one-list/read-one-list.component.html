@@ -1,0 +1,26 @@
+<div class="flex-container">
+  <div class="fav-header" *ngIf="(list | async) as list">
+    <h1 class="mat-h1">{{ list.title }}</h1>
+    <h4 class="mat-h4">{{ list.created_at | date }}</h4>
+    <!-- <button (click)="clearAllFavourites()" mat-raised-button color="warn">Clear All</button> -->
+  </div>
+  <div fxLayout="row [wrap]" fxLayoutGap="16px grid">  
+    <!-- <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let favourite of (favourites)">
+      <mat-card class="card">
+          <a routerLink="/recipe/{{ favourite.id }}">
+            <mat-card-header>
+              <mat-card-title title="{{ favourite.title }}">
+                {{ favourite.title }}
+              </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="{{ favourite.image }}">
+          </a>
+          <mat-card-actions>
+            <button (click)="clearOneFavourite(favourite)" color="warn" class="card-button" mat-mini-fab aria-label="add to favourites">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+    </div> -->
+  </div>
+</div>

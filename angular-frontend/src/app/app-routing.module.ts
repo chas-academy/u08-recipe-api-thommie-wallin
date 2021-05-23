@@ -8,6 +8,7 @@ import { RecipeDisplayComponent } from './components/recipes/recipe-display/reci
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserRecipeListsComponent } from './components/user-recipe-lists/user-recipe-lists.component';
+import { ReadOneListComponent } from './components/user-recipe-lists/read-one-list/read-one-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'favourites', component: FavouritesComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'user-recipe-lists', component: UserRecipeListsComponent },
+  { path: 'my-lists', component: UserRecipeListsComponent },
+  { path: 'my-lists/:id', component: ReadOneListComponent },
   { path: '**', component: HomeComponent },
 ];
 
