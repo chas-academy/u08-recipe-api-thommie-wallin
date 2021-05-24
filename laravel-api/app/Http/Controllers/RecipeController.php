@@ -123,8 +123,10 @@ class RecipeController extends Controller
      */
     public function destroy($recipeId, $userListId)
     {
+        $recipe = Recipe::find($recipeId);
         UserList::find($userListId)->recipes()->detach($recipeId);
+        Recipe::destroy($recipeId);
 
-        return Recipe::destroy($recipeId);
+        return $recipe;
     }
 }

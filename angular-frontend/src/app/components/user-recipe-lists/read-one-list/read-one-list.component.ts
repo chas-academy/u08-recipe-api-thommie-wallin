@@ -43,7 +43,12 @@ export class ReadOneListComponent implements OnInit {
     this.listId = this.route.snapshot.paramMap.get('id');
     this.userRecipeListsService.showRecipes(this.listId);
     this.recipes = this.userRecipeListsService.recipes;
-    console.log(this.recipes);
+    // console.log(this.recipes);
+  }
+
+  deleteOneRecipe(recipeId): void {
+    this.userRecipeListsService.deleteRecipe(recipeId, parseInt(this.listId));
+    // console.log(recipeId, parseInt(this.listId));
   }
 
 }

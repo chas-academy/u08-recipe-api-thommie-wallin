@@ -158,4 +158,28 @@ export class UserRecipeListsService {
       );
   }
 
+  deleteRecipe(recipeId, userListId) {
+    this.http.delete<any>(`${this.baseUrl}recipe/${recipeId}/fromlist/${userListId}`)
+      .subscribe(
+        data => {
+          let latestList: List[] = [];
+          let indexNr: number = 0;
+          
+          // Get latest list of recipes from observer and delete the recipe from the list.
+          this.recipes.subscribe(value => {  
+            indexNr = value.findIndex(recipe => recipe.id == data.id);
+
+            if (indexNr !== -1) {
+              value.splice(indexNr, 1);
+              latestList = value
+            }
+          }).unsubscribe();
+          
+          // Push a new copy of the lists to all Subscribers.
+          this._recipes.next(latestList);
+        },
+        error => console.log(error.error.text)
+      );
+  }
+
 }

@@ -2,7 +2,7 @@
   <div class="fav-header" *ngIf="(list | async) as list">
     <h1 class="mat-h1">{{ list.title }}</h1>
     <h4 class="mat-h4">{{ list.created_at | date }}</h4>
-    <button (click)="clearAllFavourites()" mat-raised-button color="warn">Clear All</button>
+    <button (click)="deleteAllRecipes()" mat-raised-button color="warn">Clear All</button>
   </div>
   <div fxLayout="row [wrap]" fxLayoutGap="16px grid">  
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let recipe of (recipes | async)">
@@ -16,7 +16,7 @@
             <img mat-card-image src="{{ recipe.image }}">
           </a>
           <mat-card-actions>
-            <button (click)="clearOneFavourite(recipe)" color="warn" class="card-button" mat-mini-fab aria-label="add to favourites">
+            <button (click)="deleteOneRecipe(recipe.id)" color="warn" class="card-button" mat-mini-fab aria-label="delete recipe from list">
               <mat-icon>delete</mat-icon>
             </button>
           </mat-card-actions>
