@@ -1,12 +1,21 @@
 // User interface
-export class User {
+export interface User {
   name: String;
   email: String;
   password: String;
   password_confirmation: String
 }
 
-export class ListTitle {
+// List interface
+export interface List {
+  id: number;
+  title: string;
+  user_id: number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface ListTitle {
   title: string;
 }
 

@@ -25,6 +25,6 @@ export class CreateListComponent implements OnInit {
 
   onSubmit(): void {
     this.newNamingEvent.emit(this.createListForm.value)
-    // this.createListForm.reset();
+    this.createListForm.reset();
   }
 }

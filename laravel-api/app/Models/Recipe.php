@@ -12,8 +12,10 @@ class Recipe extends Model
     use HasFactory;
 
     protected $fillable = [
-        'recipe_nr',
-        'user_lists_id'
+        'id',
+        'image',
+        'imageType',
+        'title',
     ];
 
 
@@ -24,6 +26,7 @@ class Recipe extends Model
     */
     public function userlists()
     {
-        return $this->belongsToMany(UserList::class, 'recipe_user_list', 'recipe_id', 'user_list_id');
+        // return $this->belongsToMany(UserList::class, 'recipe_user_list', 'recipe_id', 'user_list_id');
+        return $this->belongsToMany(UserList::class);
     }
 }

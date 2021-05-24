@@ -24,6 +24,7 @@ import { RecipeDisplayComponent } from './recipe-display/recipe-display.componen
 import { InstructionsComponent } from './recipe-display/components/instructions/instructions.component';
 import { IngredientsComponent } from './recipe-display/components/ingredients/ingredients.component';
 import { PresentationComponent } from './recipe-display/components/presentation/presentation.component';
+import { SaveToListComponent } from './components/recipe-list/save-to-list/save-to-list.component';
 
 
 
@@ -38,7 +39,8 @@ import { PresentationComponent } from './recipe-display/components/presentation/
     RecipeDisplayComponent,
     InstructionsComponent,
     IngredientsComponent,
-    PresentationComponent
+    PresentationComponent,
+    SaveToListComponent
   ],
   imports: [
     CommonModule,

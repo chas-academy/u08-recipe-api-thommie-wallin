@@ -17,7 +17,9 @@ class UserListController extends Controller
     {
         // return UserList::all();
         // return Auth::user()->userlist()->get();
-        return auth()->user()->userlist()->get();
+         
+        $response = auth()->user()->userlist()->get();
+        return response($response, 200);
     }
 
     /**
@@ -38,10 +40,12 @@ class UserListController extends Controller
         
 
         // return UserList::create($request->all());
-        return UserList::create([
+        $response = UserList::create([
             'title' => $request->title,
             'user_id' => auth()->user()->id
         ]);
+
+        return response($response, 200);
     }
 
     /**
@@ -80,8 +84,11 @@ class UserListController extends Controller
      */
     public function destroy($id)
     {
+        $response = UserList::find($id);
         UserList::find($id)->recipes()->detach();
-        return UserList::destroy($id);
+        UserList::destroy($id);
+
+        return response($response, 200);
     }
 
     /**

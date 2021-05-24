@@ -29,9 +29,9 @@ class RecipeController extends Controller
 
         // $recipes = UserList::with('recipes')->get();
 
-        // $response = $recipes;
-        // return response($response, 200);
-        return UserList::find($userListId)->recipes()->get();
+        $response = UserList::find($userListId)->recipes()->get();
+        return response($response, 200);
+        
 
         // return Recipe::all();
         // return auth()->user()->userlist()->recipe()->where('user_lists_id', $userListId)->get();
@@ -46,18 +46,22 @@ class RecipeController extends Controller
     public function store(Request $request, $id)
     {
         $request->validate([
-            'recipe_nr' => 'required',
-            // 'user_lists_id' => 'required',
+            'id' => 'required',
+            'image' => 'required',
+            'imageType' => 'required',
+            'title' => 'required',            
         ]);
         
         // Search if recipe exist in this userlist
-        $ulSearch = UserList::find($id)->recipes()->where('recipe_nr', $request->recipe_nr)->get();
+        $ulSearch = UserList::find($id)->recipes()->where('recipe_id', $request->id)->get();
         if (!$ulSearch->isEmpty()) {
-            return 'recipe already exist in this list';
+            return response('recipe already exist in this list');
         }
 
         // Search if recipe exist in database
-        $dbSearch = Recipe::where('recipe_nr', $request->recipe_nr)->get();
+        $dbSearch = Recipe::where('id', $request->id)->get();
+        
+        // return response($dbSearch);
         if (!$dbSearch->isEmpty()) {
             // Add recipe to userlist but not db
             UserList::find($id)->recipes()->attach($dbSearch[0]->id);
@@ -65,7 +69,7 @@ class RecipeController extends Controller
         }
 
         $recipe = Recipe::create($request->all());
-        UserList::find($id)->recipes()->attach($recipe->id);
+        UserList::find($id)->recipes()->attach($request->id);
 
         // return RecipeUserList::create([
         //     'recipe_id' => $recipe->id,
@@ -119,8 +123,10 @@ class RecipeController extends Controller
      */
     public function destroy($recipeId, $userListId)
     {
+        $recipe = Recipe::find($recipeId);
         UserList::find($userListId)->recipes()->detach($recipeId);
+        Recipe::destroy($recipeId);
 
-        return Recipe::destroy($recipeId);
+        return $recipe;
     }
 }
