@@ -7,3 +7,7 @@
     margin: 0px;
   }
 }
+
+.list-content {
+  min-height: 62vh;
+}
