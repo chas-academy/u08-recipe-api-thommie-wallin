@@ -80,5 +80,4 @@ export class UserRecipeListsComponent implements OnInit {
     }
     // console.log(this.listId);
   }
-
 }

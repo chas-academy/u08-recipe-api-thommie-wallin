@@ -182,4 +182,10 @@ export class UserRecipeListsService {
       );
   }
 
+  logoutClear() {
+    this._lists.next([]);
+    this._list.next(null);
+    this._recipes.next([]);
+  }
+
 }

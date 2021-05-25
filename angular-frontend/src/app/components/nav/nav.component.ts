@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { TokenService } from '../../shared/auth/token.service';
 import { AuthService } from '../../shared/auth/auth.service';
+import { UserRecipeListsService } from 'src/app/core/services/user-recipe-lists.service';
 
 @Component({
   selector: 'app-nav',
@@ -20,6 +21,7 @@ export class NavComponent {
     public router: Router,
     public token: TokenService,
     public authService: AuthService,
+    private userRecipeService: UserRecipeListsService,
   ) {}
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -38,6 +40,7 @@ export class NavComponent {
       },() => {
         
         this.token.removeToken();
+        this.userRecipeService.logoutClear();
         this.router.navigate(['home']);
       }
     );
