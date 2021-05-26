@@ -13,7 +13,7 @@ import { DataService } from './data.service';
   providedIn: CoreModule,
 })
 export class UserRecipeListsService {
-  private baseUrl: string = `http://u08.test/api/`;
+  private baseUrl: string = `http://u08.test/api`;
   private _lists = new BehaviorSubject<List[]>([]);
   // private dataStore: { lists: List[] } = { lists: [] }; // store our data in memory
   readonly lists = this._lists.asObservable();
@@ -24,6 +24,9 @@ export class UserRecipeListsService {
 
   private _recipes = new BehaviorSubject<any>([]);
   readonly recipes = this._recipes.asObservable();
+
+  private _statusCode = new Subject();
+  readonly statusCode = this._statusCode.asObservable();
   
 
   constructor(
@@ -49,7 +52,7 @@ export class UserRecipeListsService {
   // }
 
   showAllLists() {
-    return this.http.get<List[]>(`${this.baseUrl}userlist`).subscribe(
+    return this.http.get<List[]>(`${this.baseUrl}/userlist`).subscribe(
       data => {  
         // Push a new copy of the lists to all Subscribers.
         this._lists.next(data);
@@ -59,7 +62,7 @@ export class UserRecipeListsService {
   }
 
   showList(listId) {
-    return this.http.get<List>(`${this.baseUrl}userlist/${listId}`).subscribe(
+    return this.http.get<List>(`${this.baseUrl}/userlist/${listId}`).subscribe(
       data => {  
         
         this._list.next(data);
@@ -71,7 +74,7 @@ export class UserRecipeListsService {
   }
 
   showRecipes(listId) {
-    return this.http.get<any>(`${this.baseUrl}recipe/${listId}`).subscribe(
+    return this.http.get<any>(`${this.baseUrl}/recipe/${listId}`).subscribe(
       data => {  
         // let latestList = data;
 
@@ -105,7 +108,7 @@ export class UserRecipeListsService {
   
   //* TEST Fungerar 
   storeList(title: ListTitle) {
-    this.http.post<any>(`${this.baseUrl}userlist`, title)
+    this.http.post<any>(`${this.baseUrl}/userlist`, title)
       .subscribe(
         data => {
           let latestList: List[] = [];
@@ -124,7 +127,7 @@ export class UserRecipeListsService {
   }
 
   deleteList(listId) {
-    this.http.delete<any>(`${this.baseUrl}userlist/${listId}`)
+    this.http.delete<any>(`${this.baseUrl}/userlist/${listId}`)
       .subscribe(
         data => {
           let latestList: List[] = [];
@@ -148,10 +151,13 @@ export class UserRecipeListsService {
   }
 
   storeRecipe(listId, recipe) {
-    this.http.post<any>(`${this.baseUrl}recipe/${listId}`, recipe)
+    this.http.post<any>(`${this.baseUrl}/recipe/${listId}`, recipe)
       .subscribe(
         data => {
           // console.log(data);
+          if (data) {
+            this._statusCode.next(data);
+          }
         },
         error => console.log(error.error.text)
         
@@ -159,7 +165,7 @@ export class UserRecipeListsService {
   }
 
   deleteRecipe(recipeId, userListId) {
-    this.http.delete<any>(`${this.baseUrl}recipe/${recipeId}/fromlist/${userListId}`)
+    this.http.delete<any>(`${this.baseUrl}/recipe/${recipeId}/fromlist/${userListId}`)
       .subscribe(
         data => {
           let latestList: List[] = [];

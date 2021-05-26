@@ -55,7 +55,8 @@ class RecipeController extends Controller
         // Search if recipe exist in this userlist
         $ulSearch = UserList::find($id)->recipes()->where('recipe_id', $request->id)->get();
         if (!$ulSearch->isEmpty()) {
-            return response('recipe already exist in this list');
+            // return response('Recipe already exist in this list', 202);
+            return response(202);
         }
 
         // Search if recipe exist in database
@@ -65,7 +66,8 @@ class RecipeController extends Controller
         if (!$dbSearch->isEmpty()) {
             // Add recipe to userlist but not db
             UserList::find($id)->recipes()->attach($dbSearch[0]->id);
-            return 'recipe added to userlist';
+            // return 'recipe added to userlist';
+            return response(201);
         }
 
         $recipe = Recipe::create($request->all());
@@ -82,8 +84,8 @@ class RecipeController extends Controller
         // $recipeUserList->save();
 
         // $response = $recipe->id;
-        // return response($response, 200);
-        return $recipe;
+        return response(201);
+        // return $recipe;
         // return Recipe::create([
         //     'recipe_nr' => $request->recipe_nr,
         //     'user_lists_id' => $request->user_lists_id
