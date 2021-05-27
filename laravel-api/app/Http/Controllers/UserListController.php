@@ -92,7 +92,7 @@ class UserListController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Search the specified resource from storage.
      *
      * @param  str  $title
      * @return \Illuminate\Http\Response

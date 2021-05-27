@@ -5,7 +5,6 @@
       <a routerLink="/my-lists/{{ item.id }}">
         <span>{{ item.title }}</span>
       </a>
-      <span>{{ item.id }}</span>
       <div class="card-right">
         <button (click)="deleteId(item.id)" mat-mini-fab color="warn" aria-label="Delete icon">
           <mat-icon>delete</mat-icon>

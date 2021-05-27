@@ -10,7 +10,6 @@ export class FavouritesService {
 
   addToFavourites(recipe) {
     this.favouritesList.push(recipe);
-    console.log(this.favouritesList);
   }
 
   getFavourites() {
