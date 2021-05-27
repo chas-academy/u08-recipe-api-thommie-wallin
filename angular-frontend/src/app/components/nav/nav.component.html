@@ -9,7 +9,7 @@
       <a mat-list-item routerLink="recipes">Recipes</a>
       <a mat-list-item routerLink="favourites">Favourites</a>
       <mat-divider></mat-divider>
-      <a mat-list-item routerLink="my-lists">My Lists</a>
+      <a mat-list-item (click)="clearList()" routerLink="my-lists">My Lists</a>
       <mat-divider></mat-divider>
       <a mat-list-item routerLink="registration">Registration</a>
       <a mat-list-item routerLink="login">Login</a>

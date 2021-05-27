@@ -17,9 +17,7 @@ export class UserRecipeListsComponent implements OnInit {
   listTitle: ListTitle;
   lists: Observable<List[]>;
   listId: number;
-
-  // @ViewChild(CreateListComponent) viewChild: CreateListComponent;
-
+  
   constructor(
     public userRecipeListsService: UserRecipeListsService,
     public router: Router,
@@ -41,33 +39,38 @@ export class UserRecipeListsComponent implements OnInit {
   receiveCreateListData($event) {
     this.listTitle = $event;
 
-    if (this.listTitle) {
-      //* FUNGERAR 
-      // this.userRecipeListsService.storeList(this.listTitle).subscribe(
-      //   result => {
-      //     // console.log(result);
-          
-      //   },
-      //   error => {
-      //     this.errors = error.error;
-      //   },() => {
-          
-      //   }
-      // );
+    // Check if field empty
+    if (this.listTitle.title === "" || this.listTitle.title === null) {
+    //* FUNGERAR 
+    // this.userRecipeListsService.storeList(this.listTitle).subscribe(
+    //   result => {
+    //     // console.log(result);
+        
+    //   },
+    //   error => {
+    //     this.errors = error.error;
+    //   },() => {
+        
+    //   }
+    // );
+    
 
-      //* TEST Fungerar!!
-      this.userRecipeListsService.storeList(this.listTitle);
-      
-      this._snackBar.open('List created', 'OK', {
-        duration: 3000
-      });
-      // this.router.navigate(['user-recipe-lists'], {skipLocationChange: true} );
-      // this.userRecipeListsService.showAllLists();
-      // this.lists = this.userRecipeListsService.lists;
-      // this.userRecipeListsService.lists.subscribe(value =>  this.lists = value);
-      // console.log(this.lists);
-    }
+    //* TEST Fungerar!!
+    this.userRecipeListsService.storeList(this.listTitle);
+    this.userRecipeListsService.error.subscribe(error => {
+      if (error.status == 422) {
+        this._snackBar.open(`${error.error.errors['title'][0]}`, 'OK', {
+          duration: 3000
+        });
+      }
+    })
+  } else {
+    this.userRecipeListsService.storeList(this.listTitle);
+    this._snackBar.open('List created', 'OK', {
+      duration: 3000
+    });
   }
+}
 
   receiveReadAllListData($event) {
     this.listId = $event;
@@ -78,6 +81,5 @@ export class UserRecipeListsComponent implements OnInit {
         duration: 3000
       });
     }
-    // console.log(this.listId);
   }
 }

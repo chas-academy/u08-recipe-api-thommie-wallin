@@ -1,4 +1,5 @@
 <div class="container" *ngIf="(lists | async) as list">
-  <app-create-list (newNamingEvent)="receiveCreateListData($event)"></app-create-list>
-  <app-read-all-lists [list]="list" (deleteEvent)="receiveReadAllListData($event)"></app-read-all-lists>
+  <app-create-list class="apps" (newNamingEvent)="receiveCreateListData($event)"></app-create-list>
+  <mat-divider class="divider"></mat-divider>
+  <app-read-all-lists class="apps" [list]="list" (deleteEvent)="receiveReadAllListData($event)"></app-read-all-lists>
 </div>

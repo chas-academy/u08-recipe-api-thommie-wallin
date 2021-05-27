@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TokenService } from '../../shared/auth/token.service';
 import { AuthService } from '../../shared/auth/auth.service';
 import { UserRecipeListsService } from 'src/app/core/services/user-recipe-lists.service';
+import { FavouritesService } from 'src/app/core/services/favourites.service';
 
 @Component({
   selector: 'app-nav',
@@ -24,6 +25,7 @@ export class NavComponent {
     public token: TokenService,
     public authService: AuthService,
     private userRecipeService: UserRecipeListsService,
+    private favouritesService: FavouritesService,
     private _snackBar: MatSnackBar,
   ) {}
 
@@ -32,6 +34,10 @@ export class NavComponent {
       map(result => result.matches),
       shareReplay()
     );
+  
+  clearList() {
+    this.userRecipeService.clearList();
+  }
 
   logout() {
     this.authService.logout().subscribe(
@@ -43,7 +49,7 @@ export class NavComponent {
       error => {
         this.errors = error.error;
       },() => {
-        
+        this.favouritesService.clearAllFavourites();
         this.token.removeToken();
         this.userRecipeService.logoutClear();
         this.router.navigate(['home']);

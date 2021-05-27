@@ -1,7 +1,6 @@
 <div class="flex-container">
   <div class="fav-header" *ngIf="(list | async) as list">
     <h1 class="mat-h1">{{ list.title }}</h1>
-    <button (click)="deleteAllRecipes()" mat-raised-button color="warn">Clear All</button>
   </div>
   <div fxLayout="row [wrap]" fxLayoutGap="16px grid">  
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let recipe of (recipes | async)">
