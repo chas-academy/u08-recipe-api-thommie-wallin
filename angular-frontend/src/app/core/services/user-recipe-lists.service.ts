@@ -192,6 +192,10 @@ export class UserRecipeListsService {
       );
   }
 
+  // searchList() {
+  //   this.lists.subscribe(data => {return data});
+  // }
+
   // Clear recipes from _recipes-behavioursubject
   clearList() {
     this._recipes.next([]);

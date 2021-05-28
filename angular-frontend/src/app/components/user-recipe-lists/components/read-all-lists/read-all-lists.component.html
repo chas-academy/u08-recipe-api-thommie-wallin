@@ -1,5 +1,23 @@
 <div class="container" fxLayout="column">
-  <h1>My Lists</h1>
+  <div class="hero">
+    <h1>My Lists</h1>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Search title</mat-label>
+        <input type="text"
+              placeholder="Pick one"
+              aria-label="Title"
+              matInput
+              [formControl]="myControl"
+              [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)='showSelected($event.option.value)'>
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </div>
   <div *ngFor="let item of list">
     <mat-card class="recipe-list" >
       <a routerLink="/my-lists/{{ item.id }}">

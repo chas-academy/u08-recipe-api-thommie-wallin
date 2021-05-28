@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { UserRecipeListsComponent } from './user-recipe-lists.component';
 import { CreateListComponent } from './components/create-list/create-list.component';
@@ -39,6 +40,7 @@ import { ReadOneListComponent } from './read-one-list/read-one-list.component';
     RouterModule,
     FlexLayoutModule,
     MatDividerModule,
+    MatAutocompleteModule,
   ]
 })
 export class UserRecipeListsModule { }
