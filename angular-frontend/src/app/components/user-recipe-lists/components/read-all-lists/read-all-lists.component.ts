@@ -17,11 +17,12 @@ export class ReadAllListsComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   ngOnChanges(): void {
     // this.list.subscribe(data=>console.log(data));
-    // console.log(this.list)
+    // console.log(this.list.length/2)
   }
 
   deleteId(event) {

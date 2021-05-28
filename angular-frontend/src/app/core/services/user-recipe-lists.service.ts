@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, Subject, AsyncSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { CoreModule } from '../core.module';
 import { ListTitle, List } from '../../shared/interfaces';
@@ -12,11 +12,13 @@ import { DataService } from './data.service';
 @Injectable({
   providedIn: CoreModule,
 })
+
 export class UserRecipeListsService {
-  private baseUrl: string = `http://u08.test/api/`;
+  private baseUrl: string = `http://u08.test/api`;
+
   private _lists = new BehaviorSubject<List[]>([]);
-  // private dataStore: { lists: List[] } = { lists: [] }; // store our data in memory
   readonly lists = this._lists.asObservable();
+
 
   //? Replaysubject eller subject istället för behavioursubject?
   private _list = new Subject<List>();
@@ -24,6 +26,12 @@ export class UserRecipeListsService {
 
   private _recipes = new BehaviorSubject<any>([]);
   readonly recipes = this._recipes.asObservable();
+
+  private _statusCode = new Subject();
+  readonly statusCode = this._statusCode.asObservable();
+
+  private _error = new Subject<HttpErrorResponse>();
+  readonly error = this._error.asObservable();
   
 
   constructor(
@@ -49,7 +57,7 @@ export class UserRecipeListsService {
   // }
 
   showAllLists() {
-    return this.http.get<List[]>(`${this.baseUrl}userlist`).subscribe(
+    return this.http.get<List[]>(`${this.baseUrl}/userlist`).subscribe(
       data => {  
         // Push a new copy of the lists to all Subscribers.
         this._lists.next(data);
@@ -59,7 +67,7 @@ export class UserRecipeListsService {
   }
 
   showList(listId) {
-    return this.http.get<List>(`${this.baseUrl}userlist/${listId}`).subscribe(
+    return this.http.get<List>(`${this.baseUrl}/userlist/${listId}`).subscribe(
       data => {  
         
         this._list.next(data);
@@ -71,7 +79,7 @@ export class UserRecipeListsService {
   }
 
   showRecipes(listId) {
-    return this.http.get<any>(`${this.baseUrl}recipe/${listId}`).subscribe(
+    return this.http.get<any>(`${this.baseUrl}/recipe/${listId}`).subscribe(
       data => {  
         // let latestList = data;
 
@@ -105,7 +113,7 @@ export class UserRecipeListsService {
   
   //* TEST Fungerar 
   storeList(title: ListTitle) {
-    this.http.post<any>(`${this.baseUrl}userlist`, title)
+    this.http.post<any>(`${this.baseUrl}/userlist`, title)
       .subscribe(
         data => {
           let latestList: List[] = [];
@@ -119,12 +127,12 @@ export class UserRecipeListsService {
           // Push a new copy of the lists to all Subscribers.
           this._lists.next(latestList);
         },
-        error => console.log('Could not create list.')
+        error => this._error.next(error)
       );
   }
 
   deleteList(listId) {
-    this.http.delete<any>(`${this.baseUrl}userlist/${listId}`)
+    this.http.delete<any>(`${this.baseUrl}/userlist/${listId}`)
       .subscribe(
         data => {
           let latestList: List[] = [];
@@ -148,10 +156,12 @@ export class UserRecipeListsService {
   }
 
   storeRecipe(listId, recipe) {
-    this.http.post<any>(`${this.baseUrl}recipe/${listId}`, recipe)
+    this.http.post<any>(`${this.baseUrl}/recipe/${listId}`, recipe)
       .subscribe(
         data => {
-          // console.log(data);
+          if (data) {
+            this._statusCode.next(data);
+          }
         },
         error => console.log(error.error.text)
         
@@ -159,7 +169,7 @@ export class UserRecipeListsService {
   }
 
   deleteRecipe(recipeId, userListId) {
-    this.http.delete<any>(`${this.baseUrl}recipe/${recipeId}/fromlist/${userListId}`)
+    this.http.delete<any>(`${this.baseUrl}/recipe/${recipeId}/fromlist/${userListId}`)
       .subscribe(
         data => {
           let latestList: List[] = [];
@@ -180,6 +190,17 @@ export class UserRecipeListsService {
         },
         error => console.log(error.error.text)
       );
+  }
+
+  // Clear recipes from _recipes-behavioursubject
+  clearList() {
+    this._recipes.next([]);
+  }
+
+  logoutClear() {
+    this._lists.next([]);
+    this._list.next(null);
+    this._recipes.next([]);
   }
 
 }

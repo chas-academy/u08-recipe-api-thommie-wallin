@@ -1,5 +1,6 @@
 .grid-container {
   margin: 20px;
+  min-height: 85vh;
 }
 
 @media only screen and (max-width: 600px) {

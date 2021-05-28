@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { UserRecipeListsService } from '../../../core/services/user-recipe-lists.service';
 import { List } from '../../../shared/interfaces';
 
@@ -19,6 +21,7 @@ export class ReadOneListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public userRecipeListsService: UserRecipeListsService,
+    private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +51,9 @@ export class ReadOneListComponent implements OnInit {
 
   deleteOneRecipe(recipeId): void {
     this.userRecipeListsService.deleteRecipe(recipeId, parseInt(this.listId));
+    this._snackBar.open('Recipe deleted', 'OK', {
+      duration: 3000
+    });
     // console.log(recipeId, parseInt(this.listId));
   }
 
