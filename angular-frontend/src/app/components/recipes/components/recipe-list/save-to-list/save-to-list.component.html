@@ -1,7 +1,28 @@
-<button mat-raised-button color="primary" [matMenuTriggerFor]="aboveMenu">Add to list</button>
+<!-- If userlist is not null or an empty array run this -->
+<button mat-raised-button color="primary" [matMenuTriggerFor]="aboveMenu" *ngIf="((userLists | async) || userLists == null) && checkListLength() === true; else emptyList">Add to list</button>
 <mat-menu #aboveMenu="matMenu" yPosition="above" >
-  <button mat-menu-item
+  <button mat-menu-item    
     *ngFor="let list of (userLists | async)"
     (click)="addToList(list.id, recipe)"
     >{{ list.title }}</button>
 </mat-menu>
+
+<!-- If above statement is not true, run this if user is not logged in -->
+<ng-template #emptyList>
+  <button mat-raised-button color="primary" [matMenuTriggerFor]="aboveMenu" *ngIf="checkIfToken() == false; else createList">Add to list</button>
+  <mat-menu #aboveMenu="matMenu" yPosition="above" >
+    <button mat-menu-item 
+      (click)="loginRoute($event)"
+      >Login</button>
+  </mat-menu>
+</ng-template>
+
+<!-- If user is logged in but haven't created a list, run this -->
+<ng-template #createList>
+  <button mat-raised-button color="primary" [matMenuTriggerFor]="aboveMenu" >Add to list</button>
+  <mat-menu #aboveMenu="matMenu" yPosition="above" >
+    <button mat-menu-item 
+      (click)="createListRoute($event)"
+      >Create new list</button>
+  </mat-menu>
+</ng-template>

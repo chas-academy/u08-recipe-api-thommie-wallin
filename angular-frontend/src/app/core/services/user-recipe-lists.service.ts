@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, Subject, AsyncSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { CoreModule } from '../core.module';
 import { ListTitle, List } from '../../shared/interfaces';
-import { Recipe } from '../../shared/models/recipe.model';
-import { TokenService } from '../../shared/auth/token.service';
-import { DataService } from './data.service';
 
 @Injectable({
   providedIn: CoreModule,
@@ -19,8 +15,6 @@ export class UserRecipeListsService {
   private _lists = new BehaviorSubject<List[]>([]);
   readonly lists = this._lists.asObservable();
 
-
-  //? Replaysubject eller subject istället för behavioursubject?
   private _list = new Subject<List>();
   readonly list = this._list.asObservable();
 
@@ -36,8 +30,6 @@ export class UserRecipeListsService {
 
   constructor(
     private http: HttpClient,
-    private dataService: DataService,
-    // public token: TokenService,
   ) { }
 
   // get allLists() {
@@ -62,7 +54,8 @@ export class UserRecipeListsService {
         // Push a new copy of the lists to all Subscribers.
         this._lists.next(data);
       },
-      error => console.log('Could not load lists.')
+      error => this._statusCode.next('Could not load lists.')
+      // console.log('Could not load lists.')
     );
   }
 
@@ -164,7 +157,6 @@ export class UserRecipeListsService {
           }
         },
         error => console.log(error.error.text)
-        
       );
   }
 
@@ -191,10 +183,6 @@ export class UserRecipeListsService {
         error => console.log(error.error.text)
       );
   }
-
-  // searchList() {
-  //   this.lists.subscribe(data => {return data});
-  // }
 
   // Clear recipes from _recipes-behavioursubject
   clearList() {

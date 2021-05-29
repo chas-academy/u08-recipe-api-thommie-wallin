@@ -11,9 +11,6 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    // public function __construct() {
-    //     $this->middleware('auth:api', ['except'=>['login', 'register']]);
-    // }
     public function register(Request $request)
     {
         
@@ -28,13 +25,6 @@ class AuthController extends Controller
             'email' => $fields['email'],
             'password' => bcrypt($fields['password'])
         ]);
-
-        // $token = $user->createToken('My Token')->plainTextToken;
-
-        // $response = [
-        //     'user' => $user,
-        //     'token' => $token
-        // ];
 
         return response(201);
     }
@@ -56,13 +46,9 @@ class AuthController extends Controller
             ], 401);
         }
 
-        // $credentials = $request->only('email', 'password');
-        // Auth::attempt($credentials);
-
         $token = $user->createToken('My Token')->plainTextToken;
 
         $response = [
-            // 'user' => $user,
             'token' => $token
         ];
 
