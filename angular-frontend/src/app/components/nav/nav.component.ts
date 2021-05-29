@@ -35,6 +35,7 @@ export class NavComponent {
       shareReplay()
     );
   
+  // Clear recipelist when clicking "My Lists"
   clearList() {
     this.userRecipeService.clearList();
   }

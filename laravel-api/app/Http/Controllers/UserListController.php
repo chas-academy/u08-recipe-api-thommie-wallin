@@ -15,9 +15,6 @@ class UserListController extends Controller
      */
     public function index()
     {
-        // return UserList::all();
-        // return Auth::user()->userlist()->get();
-         
         $response = auth()->user()->userlist()->get();
         return response($response, 200);
     }
@@ -33,13 +30,7 @@ class UserListController extends Controller
         $request->validate([
             'title' => 'required'
         ]);
-
-        // $response = auth()->user()->id;
-
-        // return response($response, 201);
         
-
-        // return UserList::create($request->all());
         $response = UserList::create([
             'title' => $request->title,
             'user_id' => auth()->user()->id
