@@ -27,8 +27,8 @@ export class ReadAllListsComponent implements OnInit {
   searchObject;
 
   constructor(
-    public router: Router,
-    public userRecipeListsService: UserRecipeListsService,
+    private router: Router,
+    private userRecipeListsService: UserRecipeListsService,
     ) { }
 
   ngOnInit(): void {

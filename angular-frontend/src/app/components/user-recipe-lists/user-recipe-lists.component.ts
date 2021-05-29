@@ -16,6 +16,8 @@ export class UserRecipeListsComponent implements OnInit {
   listTitle: ListTitle;
   lists: Observable<List[]>;
   listId: number;
+
+  error;
   
   constructor(
     public userRecipeListsService: UserRecipeListsService,
@@ -26,6 +28,7 @@ export class UserRecipeListsComponent implements OnInit {
   ngOnInit(): void {
     this.userRecipeListsService.showAllLists();
     this.lists = this.userRecipeListsService.lists;
+    this.notLoggedIn();
   }
 
   
@@ -35,21 +38,6 @@ export class UserRecipeListsComponent implements OnInit {
 
     // Check if field empty
     if (this.listTitle.title === "" || this.listTitle.title === null) {
-    //* FUNGERAR 
-    // this.userRecipeListsService.storeList(this.listTitle).subscribe(
-    //   result => {
-    //     // console.log(result);
-        
-    //   },
-    //   error => {
-    //     this.errors = error.error;
-    //   },() => {
-        
-    //   }
-    // );
-    
-
-    //* TEST Fungerar!!
     this.userRecipeListsService.storeList(this.listTitle);
     this.userRecipeListsService.error.subscribe(error => {
       if (error.status == 422) {
@@ -75,5 +63,15 @@ export class UserRecipeListsComponent implements OnInit {
         duration: 3000
       });
     }
+  }
+
+  // Error msg when not logged in
+  notLoggedIn() {
+    this.error = this.userRecipeListsService.statusCode;
+    this.error.subscribe(data => {
+      this._snackBar.open(`${data}`, 'OK', {
+        duration: 3000
+      });
+    })
   }
 }
