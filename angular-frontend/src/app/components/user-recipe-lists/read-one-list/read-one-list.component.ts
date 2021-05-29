@@ -44,6 +44,7 @@ export class ReadOneListComponent implements OnInit {
 
   deleteOneRecipe(recipeId): void {
     this.userRecipeListsService.deleteRecipe(recipeId, parseInt(this.listId));
+    this.recipes = this.userRecipeListsService.recipes;
     this._snackBar.open('Recipe deleted', 'OK', {
       duration: 3000
     });
