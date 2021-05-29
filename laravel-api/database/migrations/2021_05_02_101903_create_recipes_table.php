@@ -15,7 +15,6 @@ class CreateRecipesTable extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            // $table->integer('id');
             $table->string('image')->nullable();
             $table->string('imageType')->nullable();
             $table->string('title')->nullable();

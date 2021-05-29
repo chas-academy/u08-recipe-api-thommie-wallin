@@ -27,18 +27,12 @@ export class ReadOneListComponent implements OnInit {
   ngOnInit(): void {
     this.showList();
     this.showRecipes();
-    // console.log(this.list);
   }
 
   showList(): void {
     this.listId = this.route.snapshot.paramMap.get('id');
     this.userRecipeListsService.showList(this.listId);
-    // this.userRecipeListsService.list.subscribe(data => 
-    //   // data = this.listTitle
-    //   console.log(data)
-    // );
     this.list = this.userRecipeListsService.list;
-    // console.log(this.list);
   }
 
   showRecipes(): void {
@@ -46,7 +40,6 @@ export class ReadOneListComponent implements OnInit {
     this.listId = this.route.snapshot.paramMap.get('id');
     this.userRecipeListsService.showRecipes(this.listId);
     this.recipes = this.userRecipeListsService.recipes;
-    // console.log(this.recipes);
   }
 
   deleteOneRecipe(recipeId): void {
@@ -54,7 +47,6 @@ export class ReadOneListComponent implements OnInit {
     this._snackBar.open('Recipe deleted', 'OK', {
       duration: 3000
     });
-    // console.log(recipeId, parseInt(this.listId));
   }
 
 }

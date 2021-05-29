@@ -16,7 +16,6 @@ export class UserRecipeListsComponent implements OnInit {
   listTitle: ListTitle;
   lists: Observable<List[]>;
   listId: number;
-
   error;
   
   constructor(
@@ -30,8 +29,6 @@ export class UserRecipeListsComponent implements OnInit {
     this.lists = this.userRecipeListsService.lists;
     this.notLoggedIn();
   }
-
-  
 
   receiveCreateListData($event) {
     this.listTitle = $event;

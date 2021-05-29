@@ -17,24 +17,8 @@ class RecipeController extends Controller
      */
     public function index($userListId)
     {
-        // $response = auth()->user()->userlist()->recipe()->get();
-
-        // return response($response, 201);
-        // $userlist = UserList::find($userListId);
-        // $recipes = UserList::find($userListId)->recipes()->get();
-
-        // foreach ($userlist->recipes as $recipe) {
-        //     $recipes[] += $recipe->pivot->created_at;
-        // }
-
-        // $recipes = UserList::with('recipes')->get();
-
         $response = UserList::find($userListId)->recipes()->get();
         return response($response, 200);
-        
-
-        // return Recipe::all();
-        // return auth()->user()->userlist()->recipe()->where('user_lists_id', $userListId)->get();
     }
 
     /**
@@ -55,41 +39,21 @@ class RecipeController extends Controller
         // Search if recipe exist in this userlist
         $ulSearch = UserList::find($id)->recipes()->where('recipe_id', $request->id)->get();
         if (!$ulSearch->isEmpty()) {
-            // return response('Recipe already exist in this list', 202);
             return response(202);
         }
 
         // Search if recipe exist in database
         $dbSearch = Recipe::where('id', $request->id)->get();
         
-        // return response($dbSearch);
         if (!$dbSearch->isEmpty()) {
             // Add recipe to userlist but not db
             UserList::find($id)->recipes()->attach($dbSearch[0]->id);
-            // return 'recipe added to userlist';
             return response(201);
         }
 
         $recipe = Recipe::create($request->all());
         UserList::find($id)->recipes()->attach($request->id);
-
-        // return RecipeUserList::create([
-        //     'recipe_id' => $recipe->id,
-        //     'user_list_id' => $id,
-        // ]);
-
-        // $recipeUserList = new RecipeUserList();
-        // $recipeUserList->recipe_id = $recipe->id;
-        // $recipeUserList->user_list_id = $id;
-        // $recipeUserList->save();
-
-        // $response = $recipe->id;
         return response(201);
-        // return $recipe;
-        // return Recipe::create([
-        //     'recipe_nr' => $request->recipe_nr,
-        //     'user_lists_id' => $request->user_lists_id
-        // ]);
     }
 
     /**
@@ -128,7 +92,6 @@ class RecipeController extends Controller
         $recipe = Recipe::find($recipeId);
         UserList::find($userListId)->recipes()->detach($recipeId);
         Recipe::destroy($recipeId);
-
         return $recipe;
     }
 }

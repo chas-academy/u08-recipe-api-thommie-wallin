@@ -29,10 +29,6 @@ use App\Http\Controllers\AuthController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-// Route::get('/test', function() {
-//   return 'test';
-// });
-
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
   
@@ -46,7 +42,6 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
   Route::delete('/userlist/{id}', [UserListController::class, 'destroy']);
 
   Route::get('/recipe/{id}', [RecipeController::class, 'index']);
-  // Route::get('/recipe/{id}', [RecipeController::class, 'show']);
   Route::post('/recipe/{id}', [RecipeController::class, 'store']);
   Route::put('/recipe/{id}', [RecipeController::class, 'update']);
   Route::delete('/recipe/{recipeId}/fromlist/{userListId}', [RecipeController::class, 'destroy']);

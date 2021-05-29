@@ -32,22 +32,6 @@ export class UserRecipeListsService {
     private http: HttpClient,
   ) { }
 
-  // get allLists() {
-  //   return this._lists.asObservable();
-  // }
-
-  // loadAllLists() {
-  //   this.http.get<List[]>(`${this.baseUrl}userlist`).subscribe(
-  //     data => {
-        
-  //       this.dataStore.lists = data;
-  //       this._lists.next(Object.assign({}, this.dataStore).lists); // Push a new copy of our lists to all Subscribers.
-  //       // console.log(this._lists);
-  //     },
-  //     error => console.log('Could not load lists.')
-  //   );
-  // }
-
   showAllLists() {
     return this.http.get<List[]>(`${this.baseUrl}/userlist`).subscribe(
       data => {  
@@ -55,17 +39,13 @@ export class UserRecipeListsService {
         this._lists.next(data);
       },
       error => this._statusCode.next('Could not load lists.')
-      // console.log('Could not load lists.')
     );
   }
 
   showList(listId) {
     return this.http.get<List>(`${this.baseUrl}/userlist/${listId}`).subscribe(
-      data => {  
-        
+      data => {
         this._list.next(data);
-        // this.list.subscribe(data1 => console.log(data1));
-        // console.log(data);
       },
       error => console.log('Could not load this list.')
     );
@@ -73,38 +53,13 @@ export class UserRecipeListsService {
 
   showRecipes(listId) {
     return this.http.get<any>(`${this.baseUrl}/recipe/${listId}`).subscribe(
-      data => {  
-        // let latestList = data;
-
-        // data = this.recipes;
+      data => {
         this._recipes.next(data);
-        // console.log(this.recipes);
-        // latestList.foreach(recipe_nr => {
-        //   console.log(recipe_nr);
-
-        //   // this.dataService.getRecipe(recipe_nr).subscribe(
-        //   //   data => {
-        //   //     // this.recipes += data
-        //   //     // this.recipes.push(data);
-        //   //     console.log(this.recipes);
-        //   //   }
-            
-        //   // );
-        // })
-        
-        // console.log(data);
       },
       error => console.log('Could not load this list.')
     );
   }
 
-  //* FUNGERAR 
-  // storeList(title: ListTitle): Observable<any> {
-  //   return this.http.post<ListTitle>(`${this.baseUrl}userlist`, title);
-  // }
-
-  
-  //* TEST Fungerar 
   storeList(title: ListTitle) {
     this.http.post<any>(`${this.baseUrl}/userlist`, title)
       .subscribe(
@@ -194,5 +149,4 @@ export class UserRecipeListsService {
     this._list.next(null);
     this._recipes.next([]);
   }
-
 }
