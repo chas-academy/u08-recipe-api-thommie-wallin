@@ -27,10 +27,14 @@ export class SaveToListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userRecipeListService.showAllLists();
+    this.checkIfToken();
+    if (this.isLoggedIn) {
+      this.userRecipeListService.showAllLists();
+    }
+    // this.userRecipeListService.showAllLists();
     this.userLists = this.userRecipeListService.lists;
     this.checkListLength();
-    this.checkIfToken();
+    
   }
 
   addToList(listId, recipe) {
@@ -41,7 +45,7 @@ export class SaveToListComponent implements OnInit {
           duration: 3000
         });
       } else {
-        this._snackBar.open('Recipe already on this list', 'OK', {
+        this._snackBar.open('Recipe already exist on this list', 'OK', {
           duration: 3000
         });
       }

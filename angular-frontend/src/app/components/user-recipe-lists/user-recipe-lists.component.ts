@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { UserRecipeListsService } from '../../core/services/user-recipe-lists.service';
 import { ListTitle, List } from '../../shared/interfaces';
+import { TokenService } from 'src/app/shared/auth/token.service';
 
 @Component({
   selector: 'app-user-recipe-lists',
@@ -17,15 +18,20 @@ export class UserRecipeListsComponent implements OnInit {
   lists: Observable<List[]>;
   listId: number;
   error;
+  isLoggedIn: boolean;
   
   constructor(
     public userRecipeListsService: UserRecipeListsService,
     public router: Router,
     private _snackBar: MatSnackBar,
+    private tokenService: TokenService,
   ) { }
 
   ngOnInit(): void {
-    this.userRecipeListsService.showAllLists();
+    this.checkIfToken();
+    if (this.isLoggedIn) {
+      this.userRecipeListsService.showAllLists();
+    }
     this.lists = this.userRecipeListsService.lists;
     this.notLoggedIn();
   }
@@ -42,12 +48,20 @@ export class UserRecipeListsComponent implements OnInit {
           duration: 3000
         });
       }
+
+      if (error.status == 401) {
+        this._snackBar.open(`${error.error.message}`, 'OK', {
+          duration: 3000
+        });
+      }
     })
   } else {
-    this.userRecipeListsService.storeList(this.listTitle);
-    this._snackBar.open('List created', 'OK', {
-      duration: 3000
-    });
+    if (this.isLoggedIn) {
+      this.userRecipeListsService.storeList(this.listTitle);
+      this._snackBar.open('List created', 'OK', {
+        duration: 3000
+      });
+    }
   }
 }
 
@@ -70,5 +84,10 @@ export class UserRecipeListsComponent implements OnInit {
         duration: 3000
       });
     })
+  }
+
+  // Login check
+  checkIfToken() {
+    return this.isLoggedIn = (this.tokenService.getToken()) ? true : false;
   }
 }

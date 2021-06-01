@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Recipe;
 use App\Models\UserList;
-// use App\Models\RecipeUserList;
+use App\Models\RecipeUserList;
 
 class RecipeController extends Controller
 {
@@ -90,8 +90,22 @@ class RecipeController extends Controller
     public function destroy($recipeId, $userListId)
     {
         $recipe = Recipe::find($recipeId);
-        UserList::find($userListId)->recipes()->detach($recipeId);
-        Recipe::destroy($recipeId);
-        return $recipe;
+        $userList = UserList::find($userListId);
+
+        if ($recipe && $userList) {
+            // Delete recipe from this list
+            UserList::find($userListId)->recipes()->detach($recipeId);
+
+            // Search if recipe exists on other lists
+            $result = Recipe::find($recipeId)->userlists()->first();
+
+            if ($result) {
+                return $recipe;
+            } else {
+                Recipe::destroy($recipeId);
+            }
+            return $recipe;
+        }
+        return abort(400);
     }
 }
