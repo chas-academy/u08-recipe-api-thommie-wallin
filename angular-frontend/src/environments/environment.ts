@@ -7,6 +7,11 @@ export const environment = {
   spoonacularApiKey: process.env.SPOONACULAR_API_KEY,
 };
 
+export const backend = {
+  production: false,
+  backendApiUrl: process.env.BACKEND_API_URL,
+};
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
