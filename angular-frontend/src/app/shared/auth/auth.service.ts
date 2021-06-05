@@ -3,12 +3,13 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { User } from '../interfaces';
+import { backend } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl: string = `http://u08.test/api`;
+  private baseUrl: string = `${backend.backendApiUrl}`;
 
   constructor(
     private http: HttpClient,

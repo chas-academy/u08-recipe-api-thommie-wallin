@@ -4,13 +4,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { CoreModule } from '../core.module';
 import { ListTitle, List } from '../../shared/interfaces';
+import { backend } from 'src/environments/environment';
 
 @Injectable({
   providedIn: CoreModule,
 })
 
 export class UserRecipeListsService {
-  private baseUrl: string = `http://u08.test/api`;
+  private baseUrl: string = `${backend.backendApiUrl}`;
 
   private _lists = new BehaviorSubject<List[]>([]);
   readonly lists = this._lists.asObservable();
