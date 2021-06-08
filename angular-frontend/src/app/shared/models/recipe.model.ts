@@ -1,6 +1,6 @@
 import { WinePairing } from '../interfaces';
-import { ExtendedIngredient } from './extendedingredient.model'
-import { AnalyzedInstruction } from './Analyzedinstruction.model'
+import { ExtendedIngredient } from './extendedingredient.model';
+import { AnalyzedInstruction } from './analyzedinstruction.model';
 
 export class Recipe {
   vegetarian: boolean;
